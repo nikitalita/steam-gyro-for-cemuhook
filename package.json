@@ -30,11 +30,37 @@
 		},
 		"linux": {
 			"target": [
-				"AppImage",
-				"pacman",
-				"snap",
-				"rpm",
-				"deb"
+				{
+					"target": "AppImage",
+					"arch": [
+					  "x64",
+					  "armv7l"
+					]
+				},
+				{
+					"target": "pacman",
+					"arch": [
+					  "x64"
+					]
+				},
+				{
+					"target": "snap",
+					"arch": [
+					  "x64"
+					]
+				},
+				{
+					"target": "rpm",
+					"arch": [
+					  "x64"
+					]
+				},
+				{
+					"target": "deb",
+					"arch": [
+					  "x64"
+					]
+				}
 			],
 			"publish": [
 				"github"
@@ -61,7 +87,7 @@
 		"build:frontend": "cross-env NODE_ENV=production webpack --config ./webpack/frontend.js",
 		"build:dist": "rimraf dist && npm run build:backend && npm run build:frontend",
 		"build:win": "rimraf release && electron-builder build --win --x64",
-		"build:linux": "rimraf release && electron-builder build --linux --x64"
+		"build:linux": "rimraf release && electron-builder build --linux"
 	},
 	"dependencies": {
 		"microtime": "^3.0.0",
