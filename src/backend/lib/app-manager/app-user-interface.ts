@@ -97,8 +97,9 @@ export class AppUserInterface {
     /**
      * Open renderer window.
      * @param show Specify whether the renderer must be shown to user.
+     * @param position Specify what [x,y] position the window should open to.
      */
-    public async open(show: boolean) {
+    public async open(show: boolean, position?: number[]) {
         if (this.renderer === null) {
             this.renderer = new BrowserWindow({
                 backgroundColor: "#222",
@@ -114,7 +115,9 @@ export class AppUserInterface {
                 },
                 width: 1200,
             });
-
+            if (position){
+                this.renderer.setPosition(position[0], position[1]);
+            }
             // Load web based interface
             this.renderer.loadURL(url.format({
                 pathname: path.join(__dirname, "frontend", "index.html"),
@@ -186,6 +189,20 @@ export class AppUserInterface {
      */
     public get ready() {
         return this.loaded.value;
+    }
+
+    public set position(position: number[] | null){
+        if (this.renderer && position){
+            this.renderer.setPosition(position[0], position[1]);
+        }
+    }
+
+    public get position() {
+        if (this.renderer){
+            return this.renderer.getPosition();
+        } else {
+            return null;
+        }
     }
 
     /**

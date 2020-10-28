@@ -2,6 +2,7 @@ import * as path from "path";
 import { AppManager } from "./lib/app-manager";
 
 let userDataDir: string;
+let manager: AppManager | undefined = undefined;
 
 if (process.platform === "win32"){
     userDataDir = process.env.PORTABLE_EXECUTABLE_DIR || "";
@@ -16,7 +17,16 @@ if (process.platform === "win32"){
 if (userDataDir !== undefined) {
     (async () => {
         try {
-            await AppManager.create(userDataDir, "steam-gyro.json");
+            manager = await AppManager.create(userDataDir, "steam-gyro.json");
+            if (!manager){
+                throw new Error("Manager did not start.")
+            } else {
+                process.on('message',(m)=>{
+                    if (m === 'reset' && manager){
+                        manager.exit()
+                    }       
+                })
+            }            
         } catch (error) {
             throw error;
         }

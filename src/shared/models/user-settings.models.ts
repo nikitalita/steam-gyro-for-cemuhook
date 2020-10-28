@@ -12,6 +12,12 @@ export interface UserSettings {
         address: string,
         port: number,
     };
+    debug: {
+        lastPosition: {
+            exists: boolean,
+            position: number[]
+        }
+    }
 }
 
 /**
@@ -71,6 +77,28 @@ export const UserSettingsSchema = {
                     default: 26760,
                     type: "number",
                 },
+            },
+            type: "object",
+        },
+        debug: {
+            default: {},
+            properties: {
+                lastPosition: {
+                    default: {},
+                    properties: {
+                        exists: {
+                            default: false,
+                            type: "boolean"
+                        },
+                        position: {
+                            default: [0,0],
+                            maxItems: 2,
+                            minItems: 2,
+                            type: "array",
+                        }, 
+                    },
+                    type: "object"
+                }
             },
             type: "object",
         },

@@ -33,32 +33,32 @@
 				{
 					"target": "AppImage",
 					"arch": [
-					  "x64",
-					  "armv7l"
+						"x64",
+						"armv7l"
 					]
 				},
 				{
 					"target": "pacman",
 					"arch": [
-					  "x64"
+						"x64"
 					]
 				},
 				{
 					"target": "snap",
 					"arch": [
-					  "x64"
+						"x64"
 					]
 				},
 				{
 					"target": "rpm",
 					"arch": [
-					  "x64"
+						"x64"
 					]
 				},
 				{
 					"target": "deb",
 					"arch": [
-					  "x64"
+						"x64"
 					]
 				}
 			],
@@ -74,6 +74,15 @@
 		"files": [
 			"dist/**/*",
 			"package.json"
+		]
+	},
+	"electronmon": {
+		"patterns": [
+			"dist/**",
+			"!src/*",
+			"!src/**/*",
+			"!*.*",
+			"!**/*.map"
 		]
 	},
 	"scripts": {
@@ -129,6 +138,7 @@
 		"electron": "^7.1.7",
 		"electron-builder": "^21.2.0",
 		"electron-rebuild": "^1.8.8",
+		"electronmon": "^1.1.2",
 		"file-loader": "^5.0.2",
 		"fs-extra": "^8.1.0",
 		"hack-font": "^3.3.0",
@@ -136,7 +146,7 @@
 		"html-webpack-plugin": "^3.2.0",
 		"kalmanjs": "^1.1.0",
 		"long": "^4.0.0",
-		"node-sass": "^4.13.0",
+		"node-sass": "^4.14.1",
 		"postcss-loader": "^3.0.0",
 		"random-js": "^2.1.0",
 		"random-mac": "0.0.5",

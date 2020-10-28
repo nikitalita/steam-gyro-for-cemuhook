@@ -40,8 +40,8 @@ export class AppManager {
             const serverRestartCallback = () => {
                 server.start(settings.current.server).catch((error) => manager.logError(error, { isFatal: true }));
             };
-            const showRendererCallback = () => {
-                ui.open(true).catch((error) => manager.logError(error, { isFatal: true }));
+            const showRendererCallback = (position?: number[]) => {
+                ui.open(true, position).catch((error) => manager.logError(error, { isFatal: true }));
             };
 
             const ipc = new IpcMain<IpcEvents>();
@@ -64,7 +64,14 @@ export class AppManager {
                 manager.logError(error, { display: true });
                 settings.savingDisabled = disableSaving;
             }
-
+            if (process.argv.includes("--open-config-on-start")){
+                if (process.env.NODE_ENV !== 'production' &&
+                    settings.current.debug.lastPosition.exists) {
+                        showRendererCallback(settings.current.debug.lastPosition.position)
+                } else {
+                    showRendererCallback();
+                }
+            }
             return manager;
         }
     }
@@ -136,6 +143,13 @@ export class AppManager {
      */
     public async exit() {
         await this.server.prepareToExit();
+        if (this.ui.position) {
+            this.settings.current.debug.lastPosition = {
+                exists: true,
+                position: this.ui.position,
+            }
+            this.settings.writeSettings(this.settingsPath)
+        }
         this.ui.prepareToExit();
         this.ipc.receiver
             .removeDataHandler(false)

@@ -15,16 +15,75 @@
             }
         },
         {
+            "label": "watch:backend",
             "type": "npm",
-            "script": "watch:main",
+            "script": "watch:backend",
             "isBackground": true,
-            "problemMatcher": []
+            "group": "build",
+            "problemMatcher": {
+                "owner": "typescript",
+                "fileLocation": "relative",
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "webpack is watching the files",
+                    "endsPattern": "Time: (\\d+)ms"
+                },
+                "pattern": [
+                    {
+                        "regexp": "ERROR in ([^\\(]*)\\((\\d+),(\\d+)\\):",
+                        "file": 1,
+                        "line": 2,
+                        "column": 3
+                    },
+                    {
+                        "regexp": "([A-Za-z0-9-]+):(.*)",
+                        "message": 2,
+                        "code": 1
+                    }
+                ]
+            }
         },
         {
+            "label": "watch:frontend",
             "type": "npm",
-            "script": "watch:renderer",
+            "script": "watch:frontend",
             "isBackground": true,
-            "problemMatcher": []
-        }
+            "group": "build",
+            "problemMatcher": {
+                "owner": "typescript",
+                "fileLocation": "relative",
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "webpack is watching the files",
+                    "endsPattern": "Time: (\\d+)ms"
+                },
+                "pattern": [
+                    {
+                        "regexp": "ERROR in ([^\\(]*)\\((\\d+),(\\d+)\\):",
+                        "file": 1,
+                        "line": 2,
+                        "column": 3
+                    },
+                    {
+                        "regexp": "([A-Za-z0-9-]+):(.*)",
+                        "message": 2,
+                        "code": 1
+                    }
+                ]
+            }
+        },
+        {
+            "label": "relaunch renderer debug",
+            "command": "${command:launch-config.launchConfig}",
+            "presentation": {
+                "echo": false,
+                "reveal": "never",
+                "focus": false,
+                "panel": "new",
+                "showReuseMessage": false,
+                "clear": false,
+                "group": "2"
+            }
+        },
     ]
 }
