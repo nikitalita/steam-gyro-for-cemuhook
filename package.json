@@ -92,6 +92,7 @@
 		"start": "electron ./dist/main.bundle.js",
 		"watch:backend": "webpack --watch --config ./webpack/backend.js",
 		"watch:frontend": "webpack --watch --config ./webpack/frontend.js",
+		"build:all-debug": "webpack --config ./webpack/backend.js && webpack --config ./webpack/frontend.js",
 		"build:backend": "cross-env NODE_ENV=production webpack --config ./webpack/backend.js",
 		"build:frontend": "cross-env NODE_ENV=production webpack --config ./webpack/frontend.js",
 		"build:dist": "rimraf dist && npm run build:backend && npm run build:frontend",

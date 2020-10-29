@@ -9,8 +9,8 @@
       "windows": {
         "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electronmon.cmd"
       },
-      "sourceMaps": true,
       "trace": true,
+      "sourceMaps": true,
       "restart": true,
       "env": {
         "ELECTRON_ENABLE_LOGGING": "true",
@@ -36,8 +36,7 @@
       "webRoot": "${workspaceRoot}/src",
       "sourceMaps": true,
       "preLaunchTask": "watch:frontend",
-      "outputCapture": "std",
-      "postDebugTask": "relaunch renderer debug",
+      "outputCapture": "std"
     }
   ],
   "compounds": [
